@@ -27,13 +27,12 @@ for item in fl_clean:
 def find_thirds():
     possible_thirds = []
     for unit in hunts:
-        # ignoring type 2 because those are private
-        if unit['type'] == 2:
-            pass
-        total_applicants = unit['first'] + unit['second'] + unit['third']
-        if unit['quota'] >= total_applicants:
-            gmu_details = {'unit_number': unit['unit_number'], 'tot': total_applicants, 'quota': unit['quota']}
-            possible_thirds.append(gmu_details)
+        # ignore non-type-1 units
+        if unit['type'] == 1:
+            total_applicants = unit['first'] + unit['second'] + unit['third']
+            if unit['quota'] >= total_applicants:
+                gmu_details = {'unit_number': unit['unit_number'], 'tot': total_applicants, 'quota': unit['quota']}
+                possible_thirds.append(gmu_details)
     if len(possible_thirds) > 0:
         return possible_thirds
     else:
